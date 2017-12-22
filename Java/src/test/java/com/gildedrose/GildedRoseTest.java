@@ -38,7 +38,7 @@ public class GildedRoseTest {
     @Test
     public void
     the_sell_date_of_Sulfuras_never_decreases() {
-        Item[] sulfuras = new Item[]{new Item("Sulfuras, Hand of Ragnaros",5, 10)};
+        Item[] sulfuras = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 5, 10)};
         GildedRose gildedRose = new GildedRose(sulfuras);
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].sellIn).isEqualTo(5);
@@ -50,7 +50,9 @@ public class GildedRoseTest {
         Item[] items = new Item[]{
                 new Item("Aged Brie", 5, 50),
                 new Item("Sulfuras, Hand of Ragnaros", 5, 50),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 50),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 50),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 8, 49),
+                new Item("Backstage passes to a TAFKAL80ETC concert", 4, 48),
                 new Item("Other Item", 5, 50)
         };
         GildedRose gildedRose = new GildedRose(items);
@@ -59,6 +61,8 @@ public class GildedRoseTest {
         assertThat(gildedRose.items[1].quality).isLessThanOrEqualTo(50);
         assertThat(gildedRose.items[2].quality).isLessThanOrEqualTo(50);
         assertThat(gildedRose.items[3].quality).isLessThanOrEqualTo(50);
+        assertThat(gildedRose.items[4].quality).isLessThanOrEqualTo(50);
+        assertThat(gildedRose.items[5].quality).isLessThanOrEqualTo(50);
     }
 
     @Test
@@ -78,4 +82,21 @@ public class GildedRoseTest {
         assertThat(gildedRose.items[3].quality).isGreaterThanOrEqualTo(0);
     }
 
+    @Test
+    public void
+    the_quality_of_backstage_increase_by_2_when_sell_date_is_between_6_and_10() {
+        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 7, 5)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isGreaterThanOrEqualTo(7);
+    }
+
+    @Test
+    public void
+    the_quality_of_backstage_increase_by_2_when_sell_date_is_less_than_6() {
+        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isGreaterThanOrEqualTo(8);
+    }
 }
