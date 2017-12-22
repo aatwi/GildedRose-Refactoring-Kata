@@ -29,10 +29,14 @@ public class GildedRoseTest {
     @Test
     public void
     the_quality_of_Sulfuras_never_decreases() {
-        Item[] sulfuras = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 5, 10)};
+        Item[] sulfuras = new Item[]{
+                new Item("Sulfuras, Hand of Ragnaros", 5, 10),
+                new Item("Sulfuras, Hand of Ragnaros", -1, 10),
+        };
         GildedRose gildedRose = new GildedRose(sulfuras);
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isEqualTo(10);
+        assertThat(gildedRose.items[1].quality).isEqualTo(10);
     }
 
     @Test
@@ -108,4 +112,24 @@ public class GildedRoseTest {
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isEqualTo(0);
     }
+
+    @Test
+    public void
+    the_quality_of_AgedBrie_should_increase_by_2_when_sell_date_is_less_than_zero() {
+        Item[] agedBrie = new Item[]{new Item("Aged Brie", 0, 10)};
+        GildedRose gildedRose = new GildedRose(agedBrie);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isEqualTo(12);
+    }
+
+    @Test
+    public void
+    the_quality_of_other_items_decreases_by_2_when_sell_date_is_less_than_zero() {
+        Item[] agedBrie = new Item[]{new Item("Other Items", 0, 10)};
+        GildedRose gildedRose = new GildedRose(agedBrie);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isEqualTo(8);
+    }
+
+
 }
