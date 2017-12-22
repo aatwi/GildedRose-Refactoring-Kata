@@ -99,4 +99,13 @@ public class GildedRoseTest {
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isGreaterThanOrEqualTo(8);
     }
+
+    @Test
+    public void
+    the_quality_of_backstage_drops_to_zero_after_concert() {
+        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 0, 5)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isEqualTo(0);
+    }
 }
