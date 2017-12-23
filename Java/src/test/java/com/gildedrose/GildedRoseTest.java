@@ -40,6 +40,21 @@ public class GildedRoseTest {
 
     @Test
     public void
+    the_sell_date_of_any_item_other_than_sulfuras_decreases_by_one() {
+        Item[] items = new Item[]{
+                new Item(AGED_BRIE, 5, 50),
+                new Item(CONCERT, 5, 48),
+                new Item("Other Item", 5, 50)
+        };
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].sellIn).isLessThanOrEqualTo(4);
+        assertThat(gildedRose.items[1].sellIn).isLessThanOrEqualTo(4);
+        assertThat(gildedRose.items[2].sellIn).isLessThanOrEqualTo(4);
+    }
+
+    @Test
+    public void
     the_quality_of_any_item_is_never_above_50() {
         Item[] items = new Item[]{
                 new Item(AGED_BRIE, 5, 50),
