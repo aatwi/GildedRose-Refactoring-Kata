@@ -1,26 +1,16 @@
 package com.gildedrose;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
+import static com.gildedrose.GildedRose.*;
 import static org.fest.assertions.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 
 public class GildedRoseTest {
-
-    @Ignore
-    @Test
-    public void foo() {
-        Item[] items = new Item[]{new Item("foo", 0, 0)};
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-        assertEquals("fixme", app.items[0].name);
-    }
 
     @Test
     public void
     the_quality_of_AgedBrie_should_increase_with_time() {
-        Item[] agedBrie = new Item[]{new Item("Aged Brie", 5, 10)};
+        Item[] agedBrie = new Item[]{new Item(AGED_BRIE, 5, 10)};
         GildedRose gildedRose = new GildedRose(agedBrie);
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isEqualTo(11);
@@ -30,8 +20,8 @@ public class GildedRoseTest {
     public void
     the_quality_of_Sulfuras_never_decreases() {
         Item[] sulfuras = new Item[]{
-                new Item("Sulfuras, Hand of Ragnaros", 5, 10),
-                new Item("Sulfuras, Hand of Ragnaros", -1, 10),
+                new Item(SULFURAS, 5, 10),
+                new Item(SULFURAS, -1, 10),
         };
         GildedRose gildedRose = new GildedRose(sulfuras);
         gildedRose.updateQuality();
@@ -42,7 +32,7 @@ public class GildedRoseTest {
     @Test
     public void
     the_sell_date_of_Sulfuras_never_decreases() {
-        Item[] sulfuras = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 5, 10)};
+        Item[] sulfuras = new Item[]{new Item(SULFURAS, 5, 10)};
         GildedRose gildedRose = new GildedRose(sulfuras);
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].sellIn).isEqualTo(5);
@@ -52,11 +42,11 @@ public class GildedRoseTest {
     public void
     the_quality_of_any_item_is_never_above_50() {
         Item[] items = new Item[]{
-                new Item("Aged Brie", 5, 50),
-                new Item("Sulfuras, Hand of Ragnaros", 5, 50),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 50),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 8, 49),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 4, 48),
+                new Item(AGED_BRIE, 5, 50),
+                new Item(SULFURAS, 5, 50),
+                new Item(CONCERT, 15, 50),
+                new Item(CONCERT, 8, 49),
+                new Item(CONCERT, 4, 48),
                 new Item("Other Item", 5, 50)
         };
         GildedRose gildedRose = new GildedRose(items);
@@ -73,9 +63,9 @@ public class GildedRoseTest {
     public void
     the_quality_of_any_item_is_never_below_0() {
         Item[] items = new Item[]{
-                new Item("Aged Brie", 5, 0),
-                new Item("Sulfuras, Hand of Ragnaros", 5, 0),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 0),
+                new Item(AGED_BRIE, 5, 0),
+                new Item(SULFURAS, 5, 0),
+                new Item(CONCERT, 5, 0),
                 new Item("Other Item", 5, 0)
         };
         GildedRose gildedRose = new GildedRose(items);
@@ -89,7 +79,7 @@ public class GildedRoseTest {
     @Test
     public void
     the_quality_of_backstage_increase_by_2_when_sell_date_is_between_6_and_10() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 7, 5)};
+        Item[] items = new Item[]{new Item(CONCERT, 7, 5)};
         GildedRose gildedRose = new GildedRose(items);
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isGreaterThanOrEqualTo(7);
@@ -98,7 +88,7 @@ public class GildedRoseTest {
     @Test
     public void
     the_quality_of_backstage_increase_by_2_when_sell_date_is_less_than_6() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5)};
+        Item[] items = new Item[]{new Item(CONCERT, 5, 5)};
         GildedRose gildedRose = new GildedRose(items);
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isGreaterThanOrEqualTo(8);
@@ -107,7 +97,7 @@ public class GildedRoseTest {
     @Test
     public void
     the_quality_of_backstage_drops_to_zero_after_concert() {
-        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 0, 5)};
+        Item[] items = new Item[]{new Item(CONCERT, 0, 5)};
         GildedRose gildedRose = new GildedRose(items);
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isEqualTo(0);
@@ -116,7 +106,7 @@ public class GildedRoseTest {
     @Test
     public void
     the_quality_of_AgedBrie_should_increase_by_2_when_sell_date_is_less_than_zero() {
-        Item[] agedBrie = new Item[]{new Item("Aged Brie", 0, 10)};
+        Item[] agedBrie = new Item[]{new Item(AGED_BRIE, 0, 10)};
         GildedRose gildedRose = new GildedRose(agedBrie);
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isEqualTo(12);
@@ -130,6 +120,4 @@ public class GildedRoseTest {
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isEqualTo(8);
     }
-
-
 }
