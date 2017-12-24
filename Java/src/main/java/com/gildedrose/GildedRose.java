@@ -8,6 +8,7 @@ class GildedRose {
 
     protected static final int MAX_QUALITY = 50;
     protected static final int MIN_QUALITY = 0;
+    protected static final int MIN_SELL_IN_DATE = 0;
 
     Item[] items;
 
@@ -16,7 +17,7 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (int i = MIN_QUALITY; i < items.length; i++) {
+        for (int i = 0; i < items.length; i++) {
             if (!items[i].name.equals(AGED_BRIE) && !items[i].name.equals(CONCERT)) {
                 if (items[i].quality > MIN_QUALITY) {
                     if (!items[i].name.equals(SULFURAS)) {
@@ -47,7 +48,7 @@ class GildedRose {
                 items[i].sellIn = items[i].sellIn - 1;
             }
 
-            if (items[i].sellIn < MIN_QUALITY) {
+            if (items[i].sellIn < MIN_SELL_IN_DATE) {
                 if (!items[i].name.equals(AGED_BRIE)) {
                     if (!items[i].name.equals(CONCERT)) {
                         if (items[i].quality > MIN_QUALITY) {

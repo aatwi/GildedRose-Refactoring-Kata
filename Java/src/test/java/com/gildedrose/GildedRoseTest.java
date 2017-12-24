@@ -19,76 +19,73 @@ public class GildedRoseTest {
     @Test
     public void
     the_quality_of_Sulfuras_never_decreases() {
-        Item[] sulfuras = new Item[]{
-                new Item(SULFURAS, 5, 10),
-                new Item(SULFURAS, -1, 10),
-        };
-        GildedRose gildedRose = new GildedRose(sulfuras);
-        gildedRose.updateQuality();
-        assertThat(gildedRose.items[0].quality).isEqualTo(10);
-        assertThat(gildedRose.items[1].quality).isEqualTo(10);
-    }
-
-    @Test
-    public void
-    the_sell_date_of_Sulfuras_never_decreases() {
         Item[] sulfuras = new Item[]{new Item(SULFURAS, 5, 10)};
         GildedRose gildedRose = new GildedRose(sulfuras);
         gildedRose.updateQuality();
-        assertThat(gildedRose.items[0].sellIn).isEqualTo(5);
+        assertThat(gildedRose.items[0].quality).isEqualTo(10);
     }
 
     @Test
     public void
-    the_sell_date_of_any_item_other_than_sulfuras_decreases_by_one() {
-        Item[] items = new Item[]{
-                new Item(AGED_BRIE, 5, 50),
-                new Item(CONCERT, 5, 48),
-                new Item("Other Item", 5, 50)
-        };
-        GildedRose gildedRose = new GildedRose(items);
+    the_quality_of_Sulfuras_never_decreases_even_when_sell_date_is_over() {
+        Item[] sulfuras = new Item[]{new Item(SULFURAS, -1, 10)};
+        GildedRose gildedRose = new GildedRose(sulfuras);
         gildedRose.updateQuality();
-        assertThat(gildedRose.items[0].sellIn).isLessThanOrEqualTo(4);
-        assertThat(gildedRose.items[1].sellIn).isLessThanOrEqualTo(4);
-        assertThat(gildedRose.items[2].sellIn).isLessThanOrEqualTo(4);
+        assertThat(gildedRose.items[0].quality).isEqualTo(10);
     }
 
     @Test
     public void
-    the_quality_of_any_item_is_never_above_50() {
-        Item[] items = new Item[]{
-                new Item(AGED_BRIE, 5, 50),
-                new Item(SULFURAS, 5, 50),
-                new Item(CONCERT, 15, 50),
-                new Item(CONCERT, 8, 49),
-                new Item(CONCERT, 4, 48),
-                new Item("Other Item", 5, 50)
-        };
+    the_quality_of_AgedBrie_is_never_above_50() {
+        Item[] items = new Item[]{new Item(AGED_BRIE, 5, 50)};
         GildedRose gildedRose = new GildedRose(items);
         gildedRose.updateQuality();
-        assertThat(gildedRose.items[0].quality).isLessThanOrEqualTo(50);
-        assertThat(gildedRose.items[1].quality).isLessThanOrEqualTo(50);
-        assertThat(gildedRose.items[2].quality).isLessThanOrEqualTo(50);
-        assertThat(gildedRose.items[3].quality).isLessThanOrEqualTo(50);
-        assertThat(gildedRose.items[4].quality).isLessThanOrEqualTo(50);
-        assertThat(gildedRose.items[5].quality).isLessThanOrEqualTo(50);
+        assertThat(gildedRose.items[0].quality).isEqualTo(50);
     }
 
     @Test
     public void
-    the_quality_of_any_item_is_never_below_0() {
-        Item[] items = new Item[]{
-                new Item(AGED_BRIE, 5, 0),
-                new Item(SULFURAS, 5, 0),
-                new Item(CONCERT, 5, 0),
-                new Item("Other Item", 5, 0)
-        };
+    the_quality_of_Sulfuras_is_never_above_50() {
+        Item[] items = new Item[]{new Item(SULFURAS, 5, 50)};
         GildedRose gildedRose = new GildedRose(items);
         gildedRose.updateQuality();
-        assertThat(gildedRose.items[0].quality).isGreaterThanOrEqualTo(0);
-        assertThat(gildedRose.items[1].quality).isGreaterThanOrEqualTo(0);
-        assertThat(gildedRose.items[2].quality).isGreaterThanOrEqualTo(0);
-        assertThat(gildedRose.items[3].quality).isGreaterThanOrEqualTo(0);
+        assertThat(gildedRose.items[0].quality).isEqualTo(50);
+    }
+
+    @Test
+    public void
+    the_quality_of_Concert_is_never_above_50_when_sell_date_is_greater_than_11() {
+        Item[] items = new Item[]{new Item(CONCERT, 15, 50)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isEqualTo(50);
+    }
+
+    @Test
+    public void
+    the_quality_of_Concert_is_never_above_50_when_sell_date_is_between_6_and_11() {
+        Item[] items = new Item[]{new Item(CONCERT, 10, 49)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isEqualTo(50);
+    }
+
+    @Test
+    public void
+    the_quality_of_Concert_is_never_above_50_when_sell_date_is_between_0_and_6() {
+        Item[] items = new Item[]{new Item(CONCERT, 4, 48)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isEqualTo(50);
+    }
+
+    @Test
+    public void
+    the_quality_of_any_other_item_is_never_above_50() {
+        Item[] items = new Item[]{new Item("Other Item", 5, 50)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isEqualTo(49);
     }
 
     @Test
@@ -97,16 +94,16 @@ public class GildedRoseTest {
         Item[] items = new Item[]{new Item(CONCERT, 7, 5)};
         GildedRose gildedRose = new GildedRose(items);
         gildedRose.updateQuality();
-        assertThat(gildedRose.items[0].quality).isGreaterThanOrEqualTo(7);
+        assertThat(gildedRose.items[0].quality).isEqualTo(7);
     }
 
     @Test
     public void
-    the_quality_of_backstage_increase_by_2_when_sell_date_is_less_than_6() {
+    the_quality_of_backstage_increases_by_3_when_sell_date_is_between_0_and_6() {
         Item[] items = new Item[]{new Item(CONCERT, 5, 5)};
         GildedRose gildedRose = new GildedRose(items);
         gildedRose.updateQuality();
-        assertThat(gildedRose.items[0].quality).isGreaterThanOrEqualTo(8);
+        assertThat(gildedRose.items[0].quality).isEqualTo(8);
     }
 
     @Test
@@ -134,5 +131,50 @@ public class GildedRoseTest {
         GildedRose gildedRose = new GildedRose(agedBrie);
         gildedRose.updateQuality();
         assertThat(gildedRose.items[0].quality).isEqualTo(8);
+    }
+
+    @Test
+    public void
+    the_quality_of_any_other_item_is_never_below_0() {
+        Item[] items = new Item[]{new Item("Other Item", 0, 0)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].quality).isEqualTo(0);
+    }
+
+    @Test
+    public void
+    the_sell_date_of_Sulfuras_never_decreases() {
+        Item[] sulfuras = new Item[]{new Item(SULFURAS, 5, 10)};
+        GildedRose gildedRose = new GildedRose(sulfuras);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].sellIn).isEqualTo(5);
+    }
+
+    @Test
+    public void
+    the_sell_date_of_AgedBrie_decreases_by_one() {
+        Item[] items = new Item[]{new Item(AGED_BRIE, 5, 50)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].sellIn).isEqualTo(4);
+    }
+
+    @Test
+    public void
+    the_sell_date_of_Concert_decreases_by_one() {
+        Item[] items = new Item[]{new Item(CONCERT, 5, 50)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].sellIn).isEqualTo(4);
+    }
+
+    @Test
+    public void
+    the_sell_date_of_any_other_item_decreases_by_one() {
+        Item[] items = new Item[]{new Item("Other Item", 5, 50)};
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertThat(gildedRose.items[0].sellIn).isEqualTo(4);
     }
 }
