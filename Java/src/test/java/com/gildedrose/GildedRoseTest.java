@@ -183,14 +183,14 @@ public class GildedRoseTest {
         Item[] items = new Item[]{item.build()};
         GildedRose gildedRose = new GildedRose(items);
         gildedRose.updateQuality();
-        assertThat(gildedRose.items[0].sellIn).isEqualTo(expected);
+        assertThat(gildedRose.itemAt(0).sellIn).isEqualTo(expected);
     }
 
     private void assertQualityOfGildedRose(ItemBuilder item, int expected) {
         Item[] items = new Item[]{item.build()};
         GildedRose gildedRose = new GildedRose(items);
         gildedRose.updateQuality();
-        assertThat(gildedRose.items[0].quality).isEqualTo(expected);
+        assertThat(gildedRose.itemAt(0).quality).isEqualTo(expected);
     }
 
 }
