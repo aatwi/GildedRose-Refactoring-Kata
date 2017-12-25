@@ -2,7 +2,7 @@ package com.gildedrose;
 
 import org.junit.Test;
 
-import static com.gildedrose.GildedRose.CONCERT;
+import static com.gildedrose.Concert.CONCERT;
 import static com.gildedrose.ItemBuilder.anItemBuilder;
 
 public class ConcertTest extends GildedRoseTest {

@@ -1,6 +1,8 @@
 package com.gildedrose;
 
-import static com.gildedrose.GildedRose.*;
+import static com.gildedrose.AgedBrie.AGED_BRIE;
+import static com.gildedrose.Concert.CONCERT;
+import static com.gildedrose.Sulfuras.SULFURAS;
 
 public class TexttestFixture {
     public static void main(String[] args) {

@@ -2,8 +2,8 @@ package com.gildedrose;
 
 import org.junit.Test;
 
-import static com.gildedrose.GildedRose.SULFURAS;
 import static com.gildedrose.ItemBuilder.anItemBuilder;
+import static com.gildedrose.Sulfuras.SULFURAS;
 
 public class SulfurasTest extends GildedRoseTest {
 

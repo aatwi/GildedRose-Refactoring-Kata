@@ -1,8 +1,8 @@
 package com.gildedrose;
 
-import static com.gildedrose.GildedRose.AGED_BRIE;
-
 public final class AgedBrie extends ItemVisitable {
+
+    protected static final String AGED_BRIE = "Aged Brie";
 
     public AgedBrie(int sellIn, int quality) {
         super(AGED_BRIE, sellIn, quality);

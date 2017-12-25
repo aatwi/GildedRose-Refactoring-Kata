@@ -2,7 +2,7 @@ package com.gildedrose;
 
 import org.junit.Test;
 
-import static com.gildedrose.GildedRose.AGED_BRIE;
+import static com.gildedrose.AgedBrie.AGED_BRIE;
 import static com.gildedrose.ItemBuilder.anItemBuilder;
 
 public class AgedBrieTest extends GildedRoseTest {

@@ -1,8 +1,10 @@
 package com.gildedrose;
 
-import static com.gildedrose.GildedRose.*;
-
 public class ItemVisitor implements Visitor {
+
+    private static final int MAX_QUALITY = 50;
+    private static final int MIN_QUALITY = 0;
+    private static final int MIN_SELL_IN_DATE = 0;
 
     @Override
     public void visit(AgedBrie agedBrie) {
