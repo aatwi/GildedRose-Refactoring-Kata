@@ -1,7 +1,6 @@
 package com.gildedrose;
 
-import static com.gildedrose.GildedRose.MAX_QUALITY;
-import static com.gildedrose.GildedRose.MIN_SELL_IN_DATE;
+import static com.gildedrose.GildedRose.*;
 
 public class ItemVisitor implements Visitor {
 
@@ -18,7 +17,6 @@ public class ItemVisitor implements Visitor {
 
     @Override
     public void visit(Sulfuras sulfuras) {
-
     }
 
     @Override
@@ -41,7 +39,17 @@ public class ItemVisitor implements Visitor {
 
     @Override
     public void visit(OtherItem otherItem) {
+        if (otherItem.quality > MIN_QUALITY) {
+            otherItem.quality = otherItem.quality - 1;
+        }
 
+        decrementSellInDate(otherItem);
+
+        if (otherItem.sellIn < MIN_SELL_IN_DATE) {
+            if (otherItem.quality > MIN_QUALITY) {
+                otherItem.quality = otherItem.quality - 1;
+            }
+        }
     }
 
     private void increaseQuality(Item item) {

@@ -24,31 +24,7 @@ public final class GildedRose {
     public void updateQuality() {
         ItemVisitor itemVisitor = new ItemVisitor();
         for (ItemVisitable item : itemsList) {
-            if (item instanceof AgedBrie || item instanceof Concert) {
-                item.accept(itemVisitor);
-            } else {
-                if (!item.name.equals(CONCERT)) {
-                    if (item.quality > MIN_QUALITY) {
-                        if (!item.name.equals(SULFURAS)) {
-                            item.quality = item.quality - 1;
-                        }
-                    }
-                }
-
-                if (!item.name.equals(SULFURAS)) {
-                    item.sellIn = item.sellIn - 1;
-                }
-
-                if (item.sellIn < MIN_SELL_IN_DATE) {
-                    if (!item.name.equals(CONCERT)) {
-                        if (item.quality > MIN_QUALITY) {
-                            if (!item.name.equals(SULFURAS)) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
-                    }
-                }
-            }
+            item.accept(itemVisitor);
         }
     }
 
