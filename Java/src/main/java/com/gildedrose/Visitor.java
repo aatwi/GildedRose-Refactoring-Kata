@@ -2,12 +2,13 @@ package com.gildedrose;
 
 public interface Visitor {
 
-    public void visit(AgedBrie agedBrie);
+    void visit(AgedBrie agedBrie);
 
-    public void visit(Sulfuras sulfuras);
+    void visit(Sulfuras sulfuras);
 
-    public void visit(Concert concert);
+    void visit(Concert concert);
 
-    public void visit(OtherItem otherItem);
+    void visit(OtherItem otherItem);
 
+    void visit(Conjured conjured);
 }

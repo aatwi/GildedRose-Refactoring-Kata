@@ -50,6 +50,19 @@ public class ItemVisitor implements Visitor {
         }
     }
 
+    @Override
+    public void visit(Conjured conjured) {
+        decrementQuality(conjured);
+        decrementQuality(conjured);
+
+        decrementSellInDate(conjured);
+
+        if (sellDateHasPassed(conjured)) {
+            decrementQuality(conjured);
+            decrementQuality(conjured);
+        }
+    }
+
     private boolean sellDateHasPassed(Item item) {
         return sellDateIsLessThan(item, MIN_SELL_IN_DATE);
     }
@@ -58,7 +71,7 @@ public class ItemVisitor implements Visitor {
         return item.sellIn < days;
     }
 
-    private void decrementQuality(OtherItem otherItem) {
+    private void decrementQuality(Item otherItem) {
         if (otherItem.quality > MIN_QUALITY) {
             otherItem.quality = otherItem.quality - 1;
         }

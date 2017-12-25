@@ -9,6 +9,8 @@ public final class ItemFactory {
             return new AgedBrie(item.sellIn, item.quality);
         } else if (item.name.equals(Sulfuras.SULFURAS)) {
             return new Sulfuras(item.sellIn, item.quality);
+        } else if (item.name.equals(Conjured.CONJURED)) {
+            return new Conjured(item.sellIn, item.quality);
         }
         return new OtherItem(item.name, item.sellIn, item.quality);
     }

@@ -28,16 +28,14 @@ public class SulfurasTest extends GildedRoseTest {
     @Test
     public void
     the_sell_date_of_Sulfuras_never_decreases() {
-        assertSellInDateOfGildedRose(anItemBuilder().name(SULFURAS)
+        GildedRoseTestHelper.assertSellInDate(anItemBuilder().name(SULFURAS)
                         .sellInDate(5)
-                        .quality(10),
-                5);
+                .quality(10), 5);
     }
 
     private void assertQualityOfSulfuras(int sellInDate, int quality, int expectedQuality) {
-        assertQualityOfGildedRose(anItemBuilder().name(SULFURAS)
+        GildedRoseTestHelper.assertQuality(anItemBuilder().name(SULFURAS)
                         .sellInDate(sellInDate)
-                        .quality(quality),
-                expectedQuality);
+                .quality(quality), expectedQuality);
     }
 }

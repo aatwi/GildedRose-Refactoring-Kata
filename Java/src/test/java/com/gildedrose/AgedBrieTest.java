@@ -3,9 +3,11 @@ package com.gildedrose;
 import org.junit.Test;
 
 import static com.gildedrose.AgedBrie.AGED_BRIE;
+import static com.gildedrose.GildedRoseTestHelper.assertQuality;
+import static com.gildedrose.GildedRoseTestHelper.assertSellInDate;
 import static com.gildedrose.ItemBuilder.anItemBuilder;
 
-public class AgedBrieTest extends GildedRoseTest {
+public class AgedBrieTest {
 
     @Test
     public void
@@ -28,16 +30,14 @@ public class AgedBrieTest extends GildedRoseTest {
     @Test
     public void
     the_sell_date_of_AgedBrie_decreases_by_one() {
-        assertSellInDateOfGildedRose(anItemBuilder().name(AGED_BRIE)
+        assertSellInDate(anItemBuilder().name(AGED_BRIE)
                         .sellInDate(5)
-                        .quality(50),
-                4);
+                .quality(50), 4);
     }
 
     private void assertQualityOfAgedBrie(int sellInDate, int quality, int expectedQuality) {
-        assertQualityOfGildedRose(anItemBuilder().name(AGED_BRIE)
+        assertQuality(anItemBuilder().name(AGED_BRIE)
                         .sellInDate(sellInDate)
-                        .quality(quality),
-                expectedQuality);
+                .quality(quality), expectedQuality);
     }
 }
