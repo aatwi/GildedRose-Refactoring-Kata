@@ -3,7 +3,7 @@ package com.gildedrose;
 import java.util.Arrays;
 import java.util.List;
 
-class GildedRose {
+public final class GildedRose {
 
     protected static final String AGED_BRIE = "Aged Brie";
     protected static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
