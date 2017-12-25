@@ -23,9 +23,7 @@ public final class GildedRose {
 
     public void updateQuality() {
         ItemVisitor itemVisitor = new ItemVisitor();
-        for (ItemVisitable item : itemsList) {
-            item.accept(itemVisitor);
-        }
+        itemsList.forEach(item -> item.accept(itemVisitor));
     }
 
     public Item itemAt(int index) {

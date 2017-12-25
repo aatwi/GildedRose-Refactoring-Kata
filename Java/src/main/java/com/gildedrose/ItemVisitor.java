@@ -6,11 +6,11 @@ public class ItemVisitor implements Visitor {
 
     @Override
     public void visit(AgedBrie agedBrie) {
-        decrementSellInDate(agedBrie);
-
         increaseQuality(agedBrie);
 
-        if (agedBrie.sellIn < MIN_SELL_IN_DATE) {
+        decrementSellInDate(agedBrie);
+
+        if (sellDateHasPassed(agedBrie)) {
             increaseQuality(agedBrie);
         }
     }
@@ -23,32 +23,42 @@ public class ItemVisitor implements Visitor {
     public void visit(Concert concert) {
         increaseQuality(concert);
 
-        if (concert.sellIn < 11) {
+        if (sellDateIsLessThan(concert, 11)) {
             increaseQuality(concert);
-            if (concert.sellIn < 6) {
+            if (sellDateIsLessThan(concert, 6)) {
                 increaseQuality(concert);
             }
         }
 
         decrementSellInDate(concert);
 
-        if (concert.sellIn < MIN_SELL_IN_DATE) {
-            concert.quality = 0;
+        if (sellDateHasPassed(concert)) {
+            concert.quality = MIN_QUALITY;
         }
     }
 
     @Override
     public void visit(OtherItem otherItem) {
-        if (otherItem.quality > MIN_QUALITY) {
-            otherItem.quality = otherItem.quality - 1;
-        }
+        decrementQuality(otherItem);
 
         decrementSellInDate(otherItem);
 
-        if (otherItem.sellIn < MIN_SELL_IN_DATE) {
-            if (otherItem.quality > MIN_QUALITY) {
-                otherItem.quality = otherItem.quality - 1;
-            }
+        if (sellDateHasPassed(otherItem)) {
+            decrementQuality(otherItem);
+        }
+    }
+
+    private boolean sellDateHasPassed(Item item) {
+        return sellDateIsLessThan(item, MIN_SELL_IN_DATE);
+    }
+
+    private boolean sellDateIsLessThan(Item item, int days) {
+        return item.sellIn < days;
+    }
+
+    private void decrementQuality(OtherItem otherItem) {
+        if (otherItem.quality > MIN_QUALITY) {
+            otherItem.quality = otherItem.quality - 1;
         }
     }
 
