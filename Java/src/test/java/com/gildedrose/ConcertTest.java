@@ -50,12 +50,14 @@ public class ConcertTest {
     the_sell_date_of_Concert_decreases_by_one() {
         assertSellInDate(anItemBuilder().name(CONCERT)
                         .sellInDate(5)
-                .quality(50), 4);
+                        .quality(50),
+                4);
     }
 
     private void assertQualityOfConcert(int sellInDate, int quality, int expectedQuality) {
         assertQuality(anItemBuilder().name(CONCERT)
                         .sellInDate(sellInDate)
-                .quality(quality), expectedQuality);
+                        .quality(quality),
+                expectedQuality);
     }
 }

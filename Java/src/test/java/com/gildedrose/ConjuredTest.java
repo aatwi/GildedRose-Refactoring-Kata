@@ -29,13 +29,15 @@ public class ConjuredTest {
     public void
     the_sell_date_of_Conjured_decreases_by_one() {
         GildedRoseTestHelper.assertSellInDate(anItemBuilder().name(CONJURED)
-                .sellInDate(5)
-                .quality(50), 4);
+                        .sellInDate(5)
+                        .quality(50),
+                4);
     }
 
     private void assertQualityOfConjured(int sellInDate, int quality, int expectedQuality) {
         GildedRoseTestHelper.assertQuality(anItemBuilder().name(CONJURED)
-                .sellInDate(sellInDate)
-                .quality(quality), expectedQuality);
+                        .sellInDate(sellInDate)
+                        .quality(quality),
+                expectedQuality);
     }
 }

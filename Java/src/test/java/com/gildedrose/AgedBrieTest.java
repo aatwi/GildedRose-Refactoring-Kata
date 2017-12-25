@@ -32,12 +32,14 @@ public class AgedBrieTest {
     the_sell_date_of_AgedBrie_decreases_by_one() {
         assertSellInDate(anItemBuilder().name(AGED_BRIE)
                         .sellInDate(5)
-                .quality(50), 4);
+                        .quality(50),
+                4);
     }
 
     private void assertQualityOfAgedBrie(int sellInDate, int quality, int expectedQuality) {
         assertQuality(anItemBuilder().name(AGED_BRIE)
                         .sellInDate(sellInDate)
-                .quality(quality), expectedQuality);
+                        .quality(quality),
+                expectedQuality);
     }
 }

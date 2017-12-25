@@ -31,8 +31,9 @@ public class GildedRoseTest {
     public void
     the_sell_date_of_any_other_item_decreases_by_one() {
         assertSellInDate(anItemBuilder().name("Other Item")
-                .sellInDate(5)
-                .quality(50), 4);
+                        .sellInDate(5)
+                        .quality(50),
+                4);
     }
 
     private void assertQualityOfAnItem(int sellInDate, int quality, int expectedQuality) {
