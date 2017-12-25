@@ -25,7 +25,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemVisitable build() {
-        return ItemFactory.newItem(new Item(name, sellInDate, quality));
+    public Item build() {
+        return new Item(name, sellInDate, quality);
     }
 }

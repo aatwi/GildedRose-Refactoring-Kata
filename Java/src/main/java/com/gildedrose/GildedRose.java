@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public final class GildedRose {
@@ -13,10 +13,12 @@ public final class GildedRose {
     protected static final int MIN_QUALITY = 0;
     protected static final int MIN_SELL_IN_DATE = 0;
 
-    private final List<Item> itemsList;
+    private final List<ItemVisitable> itemsList = new ArrayList<>();
 
     public GildedRose(Item[] items) {
-        this.itemsList = Arrays.asList(items);
+        for (Item item : items) {
+            itemsList.add(ItemFactory.newItem(item));
+        }
     }
 
     public void updateQuality() {
