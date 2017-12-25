@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import static com.gildedrose.GildedRose.*;
+
 public class ItemBuilder {
 
     private String name;
@@ -26,11 +28,11 @@ public class ItemBuilder {
     }
 
     public Item build() {
-        if (name.equals(GildedRose.CONCERT)) {
+        if (name.equals(CONCERT)) {
             return new Concert(sellInDate, quality);
-        } else if (name.equals(GildedRose.AGED_BRIE)) {
+        } else if (name.equals(AGED_BRIE)) {
             return new AgedBrie(sellInDate, quality);
-        } else if (name.equals(GildedRose.SULFURAS)) {
+        } else if (name.equals(SULFURAS)) {
             return new Sulfuras(sellInDate, quality);
         }
         return new OtherItem(name, sellInDate, quality);

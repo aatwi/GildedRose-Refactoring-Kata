@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public final class OtherItem extends Item implements Visitable {
+public final class OtherItem extends ItemVisitable {
 
     public OtherItem(String name, int sellIn, int quality) {
         super(name, sellIn, quality);
