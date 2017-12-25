@@ -7,15 +7,12 @@ public class ItemVisitor implements Visitor {
 
     @Override
     public void visit(AgedBrie agedBrie) {
-        if (agedBrie.quality < MAX_QUALITY) {
-            agedBrie.quality = agedBrie.quality + 1;
-        }
-        agedBrie.sellIn = agedBrie.sellIn - 1;
+        decrementSellInDate(agedBrie);
+
+        increaseQuality(agedBrie);
 
         if (agedBrie.sellIn < MIN_SELL_IN_DATE) {
-            if (agedBrie.quality < MAX_QUALITY) {
-                agedBrie.quality = agedBrie.quality + 1;
-            }
+            increaseQuality(agedBrie);
         }
     }
 
@@ -26,11 +23,34 @@ public class ItemVisitor implements Visitor {
 
     @Override
     public void visit(Concert concert) {
+        increaseQuality(concert);
 
+        if (concert.sellIn < 11) {
+            increaseQuality(concert);
+            if (concert.sellIn < 6) {
+                increaseQuality(concert);
+            }
+        }
+
+        decrementSellInDate(concert);
+
+        if (concert.sellIn < MIN_SELL_IN_DATE) {
+            concert.quality = 0;
+        }
     }
 
     @Override
     public void visit(OtherItem otherItem) {
 
+    }
+
+    private void increaseQuality(Item item) {
+        if (item.quality < MAX_QUALITY) {
+            item.quality = item.quality + 1;
+        }
+    }
+
+    private void decrementSellInDate(Item item) {
+        item.sellIn = item.sellIn - 1;
     }
 }
