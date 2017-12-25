@@ -26,6 +26,13 @@ public class ItemBuilder {
     }
 
     public Item build() {
-        return new Item(name, sellInDate, quality);
+        if (name.equals(GildedRose.CONCERT)) {
+            return new Concert(sellInDate, quality);
+        } else if (name.equals(GildedRose.AGED_BRIE)) {
+            return new AgedBrie(sellInDate, quality);
+        } else if (name.equals(GildedRose.SULFURAS)) {
+            return new Sulfuras(sellInDate, quality);
+        }
+        return new OtherItem(name, sellInDate, quality);
     }
 }
