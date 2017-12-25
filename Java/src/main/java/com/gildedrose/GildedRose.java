@@ -18,7 +18,13 @@ public final class GildedRose {
         itemsList.forEach(item -> item.accept(itemVisitor));
     }
 
-    public Item itemAt(int index) {
+    public String printItemsAsString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        itemsList.forEach(item -> stringBuilder.append(item.toString()).append("\n"));
+        return stringBuilder.toString().trim();
+    }
+
+    protected Item itemAt(int index) {
         return itemsList.get(index);
     }
 }

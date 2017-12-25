@@ -2,40 +2,39 @@ package com.gildedrose;
 
 import static com.gildedrose.AgedBrie.AGED_BRIE;
 import static com.gildedrose.Concert.CONCERT;
+import static com.gildedrose.Conjured.CONJURED;
+import static com.gildedrose.ItemBuilder.anItemBuilder;
 import static com.gildedrose.Sulfuras.SULFURAS;
 
 public class TexttestFixture {
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
 
-        Item[] items = new Item[]{
-                new Item("+5 Dexterity Vest", 10, 20), //
-                new Item(AGED_BRIE, 2, 0), //
-                new Item("Elixir of the Mongoose", 5, 7), //
-                new Item(SULFURAS, 0, 80), //
-                new Item(SULFURAS, -1, 80),
-                new Item(CONCERT, 15, 20),
-                new Item(CONCERT, 10, 49),
-                new Item(CONCERT, 5, 49),
-                // this conjured item does not work properly yet
-                new Item("Conjured Mana Cake", 3, 6)};
+        GildedRose gildedRoseApp = new GildedRose(initializeItems());
 
-        GildedRose app = new GildedRose(items);
-
-        int days = 2;
-        if (args.length > 0) {
-            days = Integer.parseInt(args[0]) + 1;
-        }
+        int days = args.length > 0 ? Integer.parseInt(args[0]) + 1 : 2;
 
         for (int i = 0; i < days; i++) {
             System.out.println("-------- day " + i + " --------");
             System.out.println("name, sellIn, quality");
-            for (Item item : items) {
-                System.out.println(item);
-            }
+            System.out.println(gildedRoseApp.printItemsAsString());
             System.out.println();
-            app.updateQuality();
+            gildedRoseApp.updateQuality();
         }
+    }
+
+    private static Item[] initializeItems() {
+        return new Item[]{
+                anItemBuilder().name("+5 Dexterity Vest").sellInDate(10).quality(20).build(),
+                anItemBuilder().name(AGED_BRIE).sellInDate(2).quality(0).build(),
+                anItemBuilder().name("Elixir of the Mongoose").sellInDate(5).quality(7).build(),
+                anItemBuilder().name(SULFURAS).sellInDate(0).quality(80).build(),
+                anItemBuilder().name(SULFURAS).sellInDate(-1).quality(80).build(),
+                anItemBuilder().name(CONCERT).sellInDate(15).quality(20).build(),
+                anItemBuilder().name(CONCERT).sellInDate(10).quality(49).build(),
+                anItemBuilder().name(CONCERT).sellInDate(5).quality(49).build(),
+                anItemBuilder().name(CONJURED).sellInDate(3).quality(6).build()
+        };
     }
 
 }

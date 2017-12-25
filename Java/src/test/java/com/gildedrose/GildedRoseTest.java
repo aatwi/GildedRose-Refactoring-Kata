@@ -5,8 +5,20 @@ import org.junit.Test;
 import static com.gildedrose.GildedRoseTestHelper.assertQuality;
 import static com.gildedrose.GildedRoseTestHelper.assertSellInDate;
 import static com.gildedrose.ItemBuilder.anItemBuilder;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class GildedRoseTest {
+
+    @Test
+    public void
+    it_should_save_the_items_in_the_list_to_a_string() {
+        Item[] items = new Item[]{
+                anItemBuilder().name("Item1").sellInDate(10).quality(20).build(),
+                anItemBuilder().name("Item2").sellInDate(15).quality(25).build()};
+        GildedRose gildedRose = new GildedRose(items);
+
+        assertThat(gildedRose.printItemsAsString()).isEqualTo("Item1, 10, 20\nItem2, 15, 25");
+    }
 
     @Test
     public void
