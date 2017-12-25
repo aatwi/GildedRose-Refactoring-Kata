@@ -10,55 +10,37 @@ public class ConcertTest extends GildedRoseTest {
     @Test
     public void
     the_quality_of_Concert_is_never_above_50_when_sell_date_is_greater_than_11() {
-        assertQualityOfGildedRose(anItemBuilder().name(CONCERT)
-                        .sellInDate(15)
-                        .quality(50),
-                50);
+        assertQualityOfConcert(15, 50, 50);
     }
 
     @Test
     public void
     the_quality_of_Concert_is_never_above_50_when_sell_date_is_between_6_and_11() {
-        assertQualityOfGildedRose(anItemBuilder().name(CONCERT)
-                        .sellInDate(10)
-                        .quality(49),
-                50);
+        assertQualityOfConcert(10, 49, 50);
     }
 
     @Test
     public void
     the_quality_of_Concert_is_never_above_50_when_sell_date_is_between_0_and_6() {
-        assertQualityOfGildedRose(anItemBuilder().name(CONCERT)
-                        .sellInDate(4)
-                        .quality(48),
-                50);
+        assertQualityOfConcert(4, 48, 50);
     }
 
     @Test
     public void
     the_quality_of_backstage_increase_by_2_when_sell_date_is_between_6_and_10() {
-        assertQualityOfGildedRose(anItemBuilder().name(CONCERT)
-                        .sellInDate(7)
-                        .quality(5),
-                7);
+        assertQualityOfConcert(7, 5, 7);
     }
 
     @Test
     public void
     the_quality_of_backstage_increases_by_3_when_sell_date_is_between_0_and_6() {
-        assertQualityOfGildedRose(anItemBuilder().name(CONCERT)
-                        .sellInDate(5)
-                        .quality(5),
-                8);
+        assertQualityOfConcert(5, 5, 8);
     }
 
     @Test
     public void
     the_quality_of_backstage_drops_to_zero_after_concert() {
-        assertQualityOfGildedRose(anItemBuilder().name(CONCERT)
-                        .sellInDate(0)
-                        .quality(5),
-                0);
+        assertQualityOfConcert(0, 5, 0);
     }
 
     @Test
@@ -68,5 +50,12 @@ public class ConcertTest extends GildedRoseTest {
                         .sellInDate(5)
                         .quality(50),
                 4);
+    }
+
+    private void assertQualityOfConcert(int sellInDate, int quality, int expectedQuality) {
+        assertQualityOfGildedRose(anItemBuilder().name(CONCERT)
+                        .sellInDate(sellInDate)
+                        .quality(quality),
+                expectedQuality);
     }
 }

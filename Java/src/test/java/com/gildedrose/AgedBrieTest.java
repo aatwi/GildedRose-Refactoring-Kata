@@ -10,28 +10,19 @@ public class AgedBrieTest extends GildedRoseTest {
     @Test
     public void
     the_quality_of_AgedBrie_should_increase_with_time() {
-        assertQualityOfGildedRose(anItemBuilder().name(AGED_BRIE)
-                        .sellInDate(5)
-                        .quality(10),
-                11);
+        assertQualityOfAgedBrie(5, 10, 11);
     }
 
     @Test
     public void
     the_quality_of_AgedBrie_is_never_above_50() {
-        assertQualityOfGildedRose(anItemBuilder().name(AGED_BRIE)
-                        .sellInDate(5)
-                        .quality(50),
-                50);
+        assertQualityOfAgedBrie(5, 50, 50);
     }
 
     @Test
     public void
     the_quality_of_AgedBrie_should_increase_by_2_when_sell_date_is_less_than_zero() {
-        assertQualityOfGildedRose(anItemBuilder().name(AGED_BRIE)
-                        .sellInDate(0)
-                        .quality(10),
-                12);
+        assertQualityOfAgedBrie(0, 10, 12);
     }
 
     @Test
@@ -41,5 +32,12 @@ public class AgedBrieTest extends GildedRoseTest {
                         .sellInDate(5)
                         .quality(50),
                 4);
+    }
+
+    private void assertQualityOfAgedBrie(int sellInDate, int quality, int expectedQuality) {
+        assertQualityOfGildedRose(anItemBuilder().name(AGED_BRIE)
+                        .sellInDate(sellInDate)
+                        .quality(quality),
+                expectedQuality);
     }
 }
